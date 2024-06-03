@@ -1,0 +1,18 @@
+export const availableBonuses = {
+    0: { name: 'Chance of Piercing Hit', values: [2, 3, 5, 10]},
+    1: { name: 'Chance of Critical Hit', values: [2, 3, 5, 10]},
+    2: { name: 'Poison Chance:', values: [3, 5, 8]},
+    3: { name: 'Chance of Blackout:', values: [2, 3, 5, 8]},
+    4: { name: 'Slowing Chance:', values: [2, 3, 5, 8]},
+    5: { name: 'Spell Speed', values: [2, 6, 10, 20]},
+    6: { name: 'Intelligence', values: [2, 4, 6, 8, 12]},
+    7: { name: 'Strength', values: [2, 4, 6, 8, 12]},
+    8: { name: 'Agility', values: [2, 4, 6, 8, 12]},
+    9: { name: 'Vitality', values: [2, 4, 6, 8, 12]},
+    10: { name: 'Strong Against Mystic', values: [2, 4, 6, 8, 10, 20],},
+    11: { name: 'Strong Against Half Human', values: [1, 2, 3, 5, 10],},
+    12: { name: 'Strong Against Orcs', values: [2, 4, 6, 8, 10, 20],},
+    13: { name: 'Strong Against Devils', values: [2, 4, 6, 8, 10, 20],},
+    14: { name: 'Strong Against Animals', values: [2, 4, 6, 8, 10, 20],},
+    15: { name: 'Strong Against Undead', values: [2, 4, 6, 8, 10, 20],},
+  }
