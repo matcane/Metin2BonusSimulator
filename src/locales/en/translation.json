@@ -22,6 +22,14 @@
     "Skill Damage": "Skill Damage",
     "[Wearable]": "[Wearable]",
     "Warrior": "Warrior",
-    "Grude Sword": "Grude Sword"
+    "Grude Sword": "Grude Sword",
+    "Switch language": "Switch language",
+    "Logout": "Logout",
+    "Save weapon": "Save weapon",
+    "Item successfully created!": "Item successfully created!",
+    "Item successfully deleted!": "Item successfully deleted!",
+    "Please wait before creating another item.": "Please wait before creating another item.",
+    "Error creating item. Please try again.": "Error creating item. Please try again.",
+    "Anonymous users can't create item.": "Anonymous users can't create item."
 }
   

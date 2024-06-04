@@ -12,9 +12,9 @@ export default function useShuffle() {
         attackSpeed: 26,
         bonus_1: {name: 'Average Damage', value: 3},
         bonus_2: {name: 'Skill Damage', value: 4},
-        bonus_3: {name: 'Spell Speed', value: 2},
-        bonus_4: {name: 'Vitality', value: 8},
-        bonus_5: {name: 'Poison Chance:', value: 5},
+        bonus_3: {name: 'Spell Speed', value: 2, isStat: false},
+        bonus_4: {name: 'Vitality', value: 8, isStat: true},
+        bonus_5: {name: 'Poison Chance:', value: 5, isStat: false},
         wearable: ['Warrior'],
       })
 
@@ -62,9 +62,10 @@ export default function useShuffle() {
       const result = {};
       let count = 0;
       randomBonuses.forEach(element => {
-        const randomBonus = availableBonuses[element].name
+        const randomBonus = availableBonuses[element].name;
         const randomValue = availableBonuses[element].values[Math.floor(Math.random() * availableBonuses[element].values.length)];
-        result[count] = {name: randomBonus, value: randomValue};
+        const isStat = availableBonuses[element].isStat;
+        result[count] = {name: randomBonus, value: randomValue, isStat: isStat};
         count++;
       });
     
@@ -82,9 +83,9 @@ export default function useShuffle() {
           ...prevItem,
           bonus_1: iNormalHitBonus === 0 ? skill_obj : avg_obj,
           bonus_2: iNormalHitBonus === 0 ? avg_obj : skill_obj,
-          bonus_3: {name: result[0].name, value: result[0].value},
-          bonus_4: {name: result[1].name, value: result[1].value},
-          bonus_5: {name: result[2].name, value: result[2].value},
+          bonus_3: {name: result[0].name, value: result[0].value, isStat: result[0].isStat},
+          bonus_4: {name: result[1].name, value: result[1].value, isStat: result[1].isStat},
+          bonus_5: {name: result[2].name, value: result[2].value, isStat: result[2].isStat},
         }));
       }
 

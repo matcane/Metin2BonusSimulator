@@ -68,7 +68,6 @@ export default function Enchant({ shuffle }) {
     div.style.left = left;
     div.style.top = top;
 
-    // Sprawdź, czy dotknięty element ma ID 'item' i wywołaj shuffle
     const touchedElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
     if (touchedElement && touchedElement.id === 'item') {
       shuffle();

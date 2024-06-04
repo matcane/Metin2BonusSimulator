@@ -22,6 +22,14 @@
     "Skill Damage": "Obrażenia umiejętności",
     "[Wearable]": "[Do ubrania]",
     "Warrior": "Wojownik",
-    "Grude Sword": "Miecz żalu"
+    "Grude Sword": "Miecz żalu",
+    "Switch language": "Zmień język",
+    "Logout": "Wyloguj",
+    "Save weapon": "Zapisz broń",
+    "Item successfully created!": "Pomyślnie stworzono przedmiot!",
+    "Item successfully deleted!": "Pomyślnie usunięto przedmiot!",
+    "Please wait before creating another item.": "Poczekaj przed utworzeniem kolejnego elementu",
+    "Error creating item. Please try again.": "Błąd podczas tworzenia elementu. Proszę spróbuj ponownie",
+    "Anonymous users can't create item.": "Anonimowi użytkownicy nie mogą tworzyć przedmiotów."
 }
   
