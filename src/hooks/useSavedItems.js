@@ -1,26 +1,41 @@
 import { useEffect, useState } from "react";
-import useSnackbar from "./useSnackbar";
 import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db, auth } from "../Firebase";
-import useShuffle from "./useShuffle";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    addSnackbar,
+    allowCreateItem,
+    preventCreateItem, removeSnackbar,
+    updateMessageSnackbar
+} from "../state/snackbar/snackbarSlice.js";
 
 export default function useSavedItems() {
+    const dispatch = useDispatch();
+    const currentItem = useSelector(state => state.item.currentItem);
+    const showSnackbar = useSelector(state => state.snackbar.showSnackbar);
+    const canCreateItem = useSelector(state => state.snackbar.canCreateItem);
 
-    const { currentItem, shuffle } = useShuffle();
-    const { showSnackbar, setShowSnackbar, messageSnackbar, setMessageSnackbar, canCreateItem, setCanCreateItem } = useSnackbar();
+
+    useEffect(() => {
+        if (showSnackbar) {
+            setTimeout(() => {
+                dispatch(removeSnackbar());
+            }, 2000);
+        }
+    }, [dispatch, showSnackbar]);
     const [items, setItems] = useState([]);
     const itemsCollectionRef = collection(db, "saved_items");
 
     const createItem = async () => {
         if (!canCreateItem) {
-          setMessageSnackbar(() => ({error: 1, message: "Please wait before creating another item." }));
-          setShowSnackbar(true);
+          dispatch(updateMessageSnackbar({error: 1, message: "Please wait before creating another item." }));
+          dispatch(addSnackbar());
           return;
         }
 
         if(!auth.currentUser.displayName) {
-          setMessageSnackbar(() => ({error: 1, message: "Anonymous users can't create item." }));
-          setShowSnackbar(true);
+          dispatch(updateMessageSnackbar({error: 1, message: "Anonymous users can't create item." }));
+          dispatch(addSnackbar());
           return;
         }
     
@@ -31,25 +46,25 @@ export default function useSavedItems() {
             author_name: auth.currentUser.displayName,
             author_photoURL: auth.currentUser.photoURL,
           });
-          setMessageSnackbar(() => ({error: 0, message: "Item successfully created!" }));
-          setShowSnackbar(true);
+          dispatch(updateMessageSnackbar({error: 0, message: "Item successfully created!" }));
+          dispatch(addSnackbar());
     
-          setCanCreateItem(false);
+          dispatch(preventCreateItem());
           setTimeout(() => {
-            setCanCreateItem(true);
+            dispatch(allowCreateItem());
           }, 15000);
         } catch (error) {
             console.log(error);
-          setMessageSnackbar(() => ({error: 1, message: "Error creating item. Please try again." }));
-          setShowSnackbar(true);
+          dispatch(updateMessageSnackbar({error: 1, message: "Error creating item. Please try again." }));
+          dispatch(addSnackbar());
         }
       };
 
     const deleteItem = async (id) => {
         const itemDoc = doc(db, "saved_items", id);
         await deleteDoc(itemDoc);
-        setMessageSnackbar(() => ({error: 0, message: "Item successfully deleted!" }));
-        setShowSnackbar(true);
+        dispatch(updateMessageSnackbar({error: 0, message: "Item successfully deleted!" }));
+        dispatch(addSnackbar());
         setItems(prevItems => prevItems.filter(item => item.id !== id));
     };
 
@@ -65,7 +80,7 @@ export default function useSavedItems() {
         };
     
         return getItems();
-    }, []);
+    }, [itemsCollectionRef]);
 
-    return { showSnackbar, messageSnackbar, canCreateItem, items, currentItem, shuffle, createItem, deleteItem }
+    return { items, createItem, deleteItem }
 }

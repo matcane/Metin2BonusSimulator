@@ -2,11 +2,14 @@ import { useTranslation } from "react-i18next";
 import Item from "../components/Item";
 import ItemStats from "../components/ItemStats";
 import { auth } from "../Firebase";
+import {useSelector} from "react-redux";
 
 
 export default function Ranking(props) {
     const { t } = useTranslation();
-    const { items, deleteItem, showSnackbar, messageSnackbar } = props;
+    const { items, deleteItem } = props;
+    const showSnackbar = useSelector(state => state.snackbar.showSnackbar);
+    const messageSnackbar = useSelector(state => state.snackbar.messageSnackbar);
 
     return(
         <div className="flex flex-col pt-4 gap-6 justify-evenly items-center w-full h-full overflow-y-auto sm:flex-row sm:flex-wrap">

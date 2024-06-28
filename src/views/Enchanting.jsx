@@ -2,10 +2,17 @@ import { useTranslation } from "react-i18next";
 import Enchant from "../components/Enchant";
 import Item from "../components/Item";
 import ItemStats from "../components/ItemStats";
+import {useSelector} from "react-redux";
+import useShuffle from "../hooks/useShuffle.js";
 
 export default function Enchanting(props) {
     const { t } = useTranslation();
-    const { showSnackbar, messageSnackbar, canCreateItem, currentItem, shuffle, createItem } = props;
+    const { shuffle } = useShuffle();
+    const { createItem } = props;
+    const currentItem = useSelector(state => state.item.currentItem);
+    const showSnackbar = useSelector(state => state.snackbar.showSnackbar);
+    const messageSnackbar = useSelector(state => state.snackbar.messageSnackbar);
+    const canCreateItem = useSelector(state => state.snackbar.canCreateItem);
 
     return(
     <div className="flex flex-col justify-evenly items-center w-full h-full">
