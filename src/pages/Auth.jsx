@@ -1,9 +1,9 @@
-import { signInWithRedirect, signInAnonymously } from "firebase/auth";
+import { signInWithPopup, signInAnonymously } from "firebase/auth";
 import { auth, provider } from "../Firebase";
 import { Navigate } from "react-router-dom";
 import { GoogleLoginButton } from "react-social-login-buttons";
 
-const signInWithGoogle = () => { signInWithRedirect(auth, provider) };
+const signInWithGoogle = () => { signInWithPopup(auth, provider) };
 const signInGuest = () => { signInAnonymously(auth) };
 
 export default function Auth({user}) {
